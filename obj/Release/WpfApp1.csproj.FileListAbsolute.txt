@@ -1,0 +1,15 @@
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\WpfApp1.csprojAssemblyReference.cache
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\MainWindow.g.cs
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\App.g.cs
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\MainWindow.baml
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\WpfApp1.Properties.Resources.resources
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\WpfApp1.csproj.GenerateResource.cache
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\WpfApp1.csproj.CoreCompileInputs.cache
+C:\Users\crach\Desktop\调参助手\WpfApp1\bin\Release\NOVA调参助手.exe.config
+C:\Users\crach\Desktop\调参助手\WpfApp1\bin\Release\NOVA调参助手.exe
+C:\Users\crach\Desktop\调参助手\WpfApp1\bin\Release\NOVA调参助手.pdb
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\NOVA调参助手_MarkupCompile.cache
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\NOVA调参助手_MarkupCompile.lref
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\NOVA调参助手.g.resources
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\NOVA调参助手.exe
+C:\Users\crach\Desktop\调参助手\WpfApp1\obj\Release\NOVA调参助手.pdb
