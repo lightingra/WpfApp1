@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.IO.Ports;
 using System.Threading;
 using System.Windows.Threading;
+using System.Security.Policy;
 
 namespace WpfApp1
 {
@@ -33,25 +34,42 @@ namespace WpfApp1
             timer.Interval = new TimeSpan(100);
             timer.Tick += Timer_Tick;
             timer.Start();
-
-            //串口
-            serial.DataReceived += Serial_DataReceived;
             #endregion
         }
 
-        #region 事件
-        //串口接收到数据
-        private void Serial_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        #region 发送指令
+        private bool SendCommond(string d)
         {
-            rxBuff += serial.ReadExisting();
+            if (serial.IsOpen)
+            {
+                serial.WriteLine(d+"\r\n");
+                textRX.Text += d + "\r\n";
+                return true;
+            }
+            return false;
         }
+        #endregion
+
+        #region 事件
         
         //定时器
         private void Timer_Tick(object sender, EventArgs e)
         {
             //更新串口接收窗口
-            textRX.Text = rxBuff;
-            textRX.ScrollToEnd();
+            try
+            {
+                if (serial.IsOpen && serial.BytesToRead > 0)
+                {
+                    byte[] buffer_serial_read = new byte[serial.BytesToRead];
+                    serial.Read(buffer_serial_read, 0, serial.BytesToRead);
+                    textRX.Text += Encoding.UTF8.GetString( buffer_serial_read );
+                    textRX.ScrollToEnd();
+                }
+            }
+            catch
+            {
+
+            }
 
             //查询串口状态
             if(!serial.IsOpen) { buttonOpen.Content = "打开串口"; }
@@ -61,11 +79,11 @@ namespace WpfApp1
         //清空接收框信息
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            rxBuff = string.Empty;
+            textRX.Clear();
         }
 
         //打开串口
-        private void buttonOpen_Click(object sender, RoutedEventArgs e)
+        private void ButtonOpen_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -101,7 +119,7 @@ namespace WpfApp1
         }
 
         //发生指令
-        private void textTX_PreviewKeyDown(object sender, KeyEventArgs e)
+        private void TextTX_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key==Key.Enter)
             {
@@ -110,18 +128,39 @@ namespace WpfApp1
                     if (serial.IsOpen)
                     {
                         serial.WriteLine(textTX.Text + "\r\n");
-                        textTX.Clear();
+                        textRX.Text += textTX.Text + "\r\n";
                         e.Handled = true;
                     }
                 }
+            }
+            if(e.Key==Key.Q)
+            {
+                if (serial.IsOpen)
+                {
+                    serial.WriteLine("M410\r\n");
+                    textRX.Text += "M410\r\n";
+                    e.Handled = true;
+                }
+            }
+        }
+
+        //SD卡打印
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            if (serial.IsOpen)
+            {
+                serial.WriteLine("M21\r\n");
+                serial.WriteLine("M23 LEFA.TXT\r\n");
+                serial.WriteLine("M24\r\n");
+                textTX.Clear();
+                e.Handled = true;
             }
         }
         #endregion
 
         #region 变量
-        SerialPort serial = new SerialPort();
-        DispatcherTimer timer = new DispatcherTimer();
-        string rxBuff;
+        readonly SerialPort serial = new SerialPort();
+        readonly DispatcherTimer timer = new DispatcherTimer();
         #endregion
 
         #region 参数设置 
@@ -175,6 +214,39 @@ namespace WpfApp1
                 e.Handled = true;
             }
         }
+
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            SendCommond("M112");
+        }
+
+        private void Button_Click_7(object sender, RoutedEventArgs e)
+        {
+            SendCommond("G91");
+        }
+
+        private void Button_Click_8(object sender, RoutedEventArgs e)
+        {
+            SendCommond("M119");
+        }
+
+        private void Button_Click_9(object sender, RoutedEventArgs e)
+        {
+            SendCommond("M410");
+        }
+
+        private void Button_Click_10(object sender, RoutedEventArgs e)
+        {
+            SendCommond("G0 X" + textG0.Text);
+        }
+
+        private void Button_Click_11(object sender, RoutedEventArgs e)
+        {
+            SendCommond("G0 Y" + textG0.Text);
+        }
         #endregion
+
+        //设置为绝对坐标
+
     }
 }

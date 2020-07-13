@@ -3,25 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="NOVA调参助手" Height="450" Width="834.704">
+        Title="NOVA调参助手" Height="585.347" Width="819.666">
     <Grid>
-        <Canvas HorizontalAlignment="Left" Height="399" Margin="10,10,0,0" VerticalAlignment="Top" Width="139" Background="Black">
+        <Canvas HorizontalAlignment="Left" Height="534" Margin="10,10,0,0" VerticalAlignment="Top" Width="139" Background="Black">
             <ComboBox Canvas.Left="10" Canvas.Top="10" Width="120" DropDownOpened="ComboBox_DropDownOpened" Name="ComNames" DropDownClosed="ComNames_DropDownClosed"/>
             <TextBox Height="23" Canvas.Left="10" TextWrapping="Wrap" Text="250000" Canvas.Top="36" Width="120" Name="textBaudRate"/>
-            <Button Content="打开串口" Canvas.Left="10" Canvas.Top="64" Width="120" Name="buttonOpen" Click="buttonOpen_Click"/>
+            <Button Content="打开串口" Canvas.Left="10" Canvas.Top="64" Width="120" Name="buttonOpen" Click="ButtonOpen_Click"/>
             <Button Content="清空接收区" Canvas.Left="10" Canvas.Top="88" Width="119" Click="Button_Click"/>
+            <TextBox Height="23" TextWrapping="Wrap" Canvas.Top="501" Width="119" Background="#FFB2A6A6" Foreground="#FF00FF17" x:Name="textTX" PreviewKeyDown="TextTX_PreviewKeyDown"
+                     InputMethod.IsInputMethodEnabled="False" CharacterCasing="Upper" Canvas.Left="10"/>
         </Canvas>
         <Canvas HorizontalAlignment="Left" Height="399" Margin="154,10,0,0" VerticalAlignment="Top" Width="478">
-            <TextBox Height="351" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="10" Width="458" Background="Black" BorderBrush="#FF8B7777" Foreground="#FF00FD45"
+            <TextBox Height="529" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="10" Width="458" Background="Black" BorderBrush="#FF8B7777" Foreground="#FF00FD45"
                      IsReadOnly="True" Name="textRX"
                      VerticalScrollBarVisibility="Visible"/>
-            <TextBox Height="23" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="366" Width="458" Background="Black" Foreground="#FF00FF17" Name="textTX" PreviewKeyDown="textTX_PreviewKeyDown"
-                     InputMethod.IsInputMethodEnabled="False" CharacterCasing="Upper"/>
-            <Label Content="回车发送指令" Canvas.Left="386" Canvas.Top="366" Foreground="Red"/>
+            <Label Content="回车发送指令" Canvas.Left="-98" Canvas.Top="474" Foreground="Red"/>
         </Canvas>
-        <Canvas HorizontalAlignment="Left" Height="399" Margin="637,10,0,0" VerticalAlignment="Top" Width="180">
+        <Canvas HorizontalAlignment="Left" Height="534" Margin="637,10,0,0" VerticalAlignment="Top" Width="141">
             <!--参数输入文本处理-->
             <TextBox Height="23" Canvas.Left="10" TextWrapping="Wrap" Text="80.00" Canvas.Top="10" Width="120" Name="textM92X"
                      InputMethod.IsInputMethodEnabled="False" MaxLength="6"/>
@@ -36,6 +35,15 @@
             <Button Content="恢复设置" Canvas.Left="10" Canvas.Top="142" Width="120" Click="Button_Click_4"/>
             <Label Content="X轴" Canvas.Left="135" Canvas.Top="10"/>
             <Label Content="Y轴" Canvas.Left="135" Canvas.Top="44"/>
+            <Button Content="SD卡打印" Canvas.Left="10" Canvas.Top="166" Width="120" Click="Button_Click_5"/>
+            <Button Content="G91" Canvas.Left="10" Canvas.Top="190" Width="120" Click="Button_Click_7"/>
+            <Button Content="M112急停" Canvas.Left="10" Canvas.Top="238" Width="120" Click="Button_Click_6" Height="73"/>
+            <Button Content="M119" Canvas.Left="10" Canvas.Top="214" Width="120" Click="Button_Click_8"/>
+            <Button Content="M410" Canvas.Left="10" Canvas.Top="316" Width="120" Click="Button_Click_9" Height="73"/>
+            <Button Content="G0 X" Canvas.Left="10" Canvas.Top="422" Width="120" Click="Button_Click_10"/>
+            <Button Content="G0 Y" Canvas.Left="10" Canvas.Top="446" Width="120" Click="Button_Click_11"/>
+            <TextBox x:Name="textG0" Height="23" Canvas.Left="10" TextWrapping="Wrap" Text="1" Canvas.Top="394" Width="120"/>
+            <Label Content="mm" Canvas.Left="91" Canvas.Top="394" Foreground="Red"/>
         </Canvas>
     </Grid>
 </Window>
